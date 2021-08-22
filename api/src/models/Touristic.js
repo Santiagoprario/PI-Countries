@@ -6,17 +6,17 @@ module.exports = (sequelize) => {
   sequelize.define('touristic', {
     idActivity : {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        /*allowNull: false,*/
         primaryKey: true,
         autoIncrement: true
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      /*allowNull: false,*/
     },
     dificulty : {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        /*allowNull: false,*/
         validate: {
             min:1,
             max:5
@@ -24,11 +24,11 @@ module.exports = (sequelize) => {
     },
     duration : {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        /*allowNull: false,*/
     },
     season : {
         type: DataTypes.STRING,
-        allowNull: false,
+        /*allowNull: false,*/
         validate : { 
         isIn: [['otono', 'invierno','primavera','verano']],
         }

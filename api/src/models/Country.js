@@ -30,12 +30,10 @@ module.exports = (sequelize) => {
     area : {
       type: DataTypes.INTEGER,
     },
-    poblation : {
+    population : {
       type: DataTypes.INTEGER,
     },
   }, {
-    timestamps : true,
-    createdAt: false,
-    updateAt: 'actualizado'
+    timestamps : false,
   });
 };

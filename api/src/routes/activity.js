@@ -1,26 +1,27 @@
 const { Router }  = require("express")
-const { Country , Touristic} = require("../db");
+const { Country , Touristic } = require("../db");
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 const router = Router();
 
-router.post("/",  async (req, res) => {
-    let { name , dificulty , duration , season , country} = req.body;
-    
-    const createActivity = await Touristic.create({
-        name,
-        dificulty,
-        duration,
-        season,
-    });
+router.post('/', async (req, res) => {
+    const {name , dificulty , duration , season }= req.body;
+    console.log(name)
+    console.log(req.body)
     try {
-
-    } catch {
-
+        let act = await Touristic.create({
+                name: name,
+                dificulty: dificulty,
+                duration: duration,
+                season: season
+    
+        });
+        return res.json(act)
+    } catch (error) {
+        console.log(error)
     }
-
-});
+})
 
 router.get("/",  (req, res) => { 
     return  Touristic.findAll()
