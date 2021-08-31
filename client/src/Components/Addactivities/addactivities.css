@@ -1,0 +1,46 @@
+.form {
+  display: flex;
+  max-width: 300px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.input {
+  display:flex;
+  width: 250px;
+  justify-self:center;
+  justify-self:center;
+  margin :auto;
+  margin-bottom: 10px;
+
+
+}
+.flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+
+.btn1 {
+  border-radius: 10px;
+  width: 100px;
+}
+
+.btn1:hover {
+   background-color: black;
+   color: white;
+}
+
+.title-act {
+  margin-bottom: 30px;
+  font-size: 20px;
+}

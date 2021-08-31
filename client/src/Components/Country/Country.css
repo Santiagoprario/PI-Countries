@@ -1,0 +1,51 @@
+.countryCard{
+   height: 200px;
+   width: 250px;
+   margin: 50px 30px 30px 30px;
+   padding: 10px 10px 10px 10px;
+   box-shadow: 0px 10px 10px black;
+   color:black;
+   background-color: lightgray;
+   text-decoration: none !important;
+}
+
+
+
+.countryCard:hover {
+    background-color: gray;
+    color: white;
+}
+
+.list {
+    text-decoration: none;
+    display: block;
+    justify-content: left;
+    
+}
+
+h3 {
+    margin: 0 0 0 0;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: flex-end;
+    size: auto;
+
+}
+
+h4 {
+    margin-top: 0px;
+   
+}
+
+a{
+    text-decoration: none;
+}
+
+.img {
+    min-height: 140px;
+    width: 100%;
+    margin: auto;
+    align-content: center;
+}
+

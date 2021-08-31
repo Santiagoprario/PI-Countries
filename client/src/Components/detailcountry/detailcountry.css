@@ -1,0 +1,48 @@
+.container {
+    margin: 20px 30px 0 30px;
+    box-shadow: 0px 10px 10px black;
+    color:black;
+    background-color: lightgray;
+   
+}
+.box {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    align-content: center;
+
+}
+
+.imgflag {
+    height: 250px;
+    width: auto;
+    margin-top: 20px;
+
+}
+
+.btn {
+    background: black;
+    color: #e0e0e0;
+    font-size: 15px;
+    width: 120px;
+    height : 40px;
+    border-radius: 15px;
+    border-color: transparent;
+    margin-bottom: 20px;
+
+}
+
+.btn:hover {
+    transition: all .5s ease-in-out;
+    background: gray;
+    color: white;
+}
+
+.listOne {
+    color:black;
+    display:block;
+
+}
