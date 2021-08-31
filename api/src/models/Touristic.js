@@ -3,20 +3,15 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('touristic', {
-    idActivity : {
-        type: DataTypes.INTEGER,
-        /*allowNull: false,*/
-        primaryKey: true,
-        autoIncrement: true
-    },
+  sequelize.define('Activities', {
     name: {
       type: DataTypes.STRING,
-      /*allowNull: false,*/
+      allowNull: false,
+      unique: true
     },
-    dificulty : {
+    difficulty : {
         type: DataTypes.INTEGER,
-        /*allowNull: false,*/
+        allowNull: false,
         validate: {
             min:1,
             max:5
@@ -24,15 +19,13 @@ module.exports = (sequelize) => {
     },
     duration : {
         type: DataTypes.INTEGER,
-        /*allowNull: false,*/
+        allowNull: false
     },
     season : {
         type: DataTypes.STRING,
-        /*allowNull: false,*/
         validate : { 
         isIn: [['otono', 'invierno','primavera','verano']],
         }
-       
     },
   },{
     timestamps : true,

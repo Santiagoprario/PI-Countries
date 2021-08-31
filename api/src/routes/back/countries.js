@@ -5,37 +5,27 @@ const Op = Sequelize.Op;
 
 const router = Router();
 
-router.get("/all/all",  async (req, res) => {
+router.get("/",  async (req, res) => {
   let { name , page , pageSize , order } = req.query
   try { 
   const pais = await Country.findAll ({
     where: { name: { [Sequelize.Op.iLike] : `%${name}%`} },
     include: Activity
   })
-  
-  if(page && pageSize && order==='DOWN') {
-    const pages = await Country.findAll({
-     attributes: ["idCountry" , 'name', 'flag' , 'continent' , 'capital'],
-     order: [
-       ['population','DESC'],
-     ],
-     offset: (page * pageSize),
-     limit: pageSize
-   })
-   return res.json(pages)
- }
 
-  if(page && pageSize && order==='UP') {
-    const pages = await Country.findAll({
-     attributes: ["idCountry" , 'name', 'flag' , 'continent' , 'capital'],
-     order: [
-       ['population','ASC'],
-     ],
-     offset: (page * pageSize),
-     limit: pageSize
-   })
-   return res.json(pages)
- }
+  if(!page && !pageSize) {
+    const countries = await Country.findAll({
+      attributes: ["idCountry" , 'name', 'flag' , 'continent' , 'poblation'],
+      order: [
+        ['name'],
+      ],
+      
+    })
+    
+    
+    return res.json(countries)
+  }
+  
   
   if(page && pageSize && order==='DESC') {
      const pages = await Country.findAll({
@@ -88,19 +78,10 @@ router.get("/:id", async (req, res) => {
     ((error) => res.status(500).json({ message: error.message }))};
 });
 
-router.get('/' , async (req,res) => {
-  let { name } = req.query;
+router.get('/all/all' , async (req,res) => {
   try {
-   if(name) {  
-    let pais = await Country.findAll ({
-      where: { name: { [Sequelize.Op.iLike] : `%${name}%`} },
-      include: Activity
-    })
-    return res.json(pais)
-   }
-  
   let countries = await Country.findAll({
-    attributes: ["idCountry" , 'name' ,'flag' , 'continent' , 'population'],
+    attributes: ["idCountry" , 'name'],
     order: [
       ['name'],
     ],
