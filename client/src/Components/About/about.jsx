@@ -12,7 +12,7 @@ export function About() {
            <p>Redux (Storage)</p>
            <p>Express (Servidor)</p>
            <p>PostgreSQL (Base de Datos)</p>
-           <p>Sequepze (ORM)</p>
+           <p>Sequelize (ORM)</p>
        </div>
     )
 };

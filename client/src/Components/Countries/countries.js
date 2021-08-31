@@ -31,6 +31,7 @@ export const Countries = () => {
 
   
   function handlepagenext () {
+    if(page===24) return page;
     setPage(page +1)
   }
   function handlepageprev () {
