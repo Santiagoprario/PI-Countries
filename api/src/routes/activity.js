@@ -42,6 +42,7 @@ router.post('/', async (req, res) => {
            for (var i = 0 ; i<countries.length ; i++) {
             let countryFound = await Country.findByPk(countries[i])
             await activityCreated.addCountries(countryFound) 
+            await countryFound.addActivities(activityCreated)
            }
            return res.json(activityCreated)
          }
@@ -59,7 +60,9 @@ router.post('/', async (req, res) => {
 
 
 router.get("/", async (req, res) => {
-    await Activities.findAll({include: [ { model: Country }]})
+    await Activities.findAll({include: [ { model: Country ,
+      attributes: ["idCountry" , 'name' ,'flag' , 'continent']
+    }]})
       .then((activities) => res.json(activities))
       .catch((error) => res.status(500).json({ message: error.message }));
   });

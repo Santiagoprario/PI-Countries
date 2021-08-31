@@ -77,10 +77,13 @@ router.get("/all/all",  async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   let id = req.params.id.toUpperCase();
-  try {const pais = await Country.findOne ({
+  try {
+    const pais = await Country.findOne ({
     where: { idCountry:id },
-    include: Activity
+    
   })
+
+  
   if (pais) return res.json(pais)
   if (!pais) return res.status(404).json({message: 'No hemos podido encontrar el codigo solicitado'})
     }
@@ -94,7 +97,7 @@ router.get('/' , async (req,res) => {
    if(name) {  
     let pais = await Country.findAll ({
       where: { name: { [Sequelize.Op.iLike] : `%${name}%`} },
-      include: Activity
+    
     })
     return res.json(pais)
    }
