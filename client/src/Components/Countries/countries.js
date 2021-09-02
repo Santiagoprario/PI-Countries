@@ -14,7 +14,8 @@ export const Countries = () => {
     continent:false,
     search:'',
     filter:'ASC',
-    filterName:'Z to A'
+    filterName:'Z to A',
+    activities : ''
   })
 
   const [page ,setPage] = useState(0)
@@ -24,14 +25,19 @@ export const Countries = () => {
 
   useEffect(() => {
     dispatch(getCountries(page , pageSize ,input.filter ));
-    
-  }, [page , input.filter , input.paises ])
+  }, [page , input.filter , input.paises , input.continent])
 
-  console.log(countries) 
 
+  let numpag = 10 * page
   
   function handlepagenext () {
     if(page===24) return page;
+    if(input.continent) {
+      setInput({
+        ...input,
+        paises: input.paises.slice(numpag,numpag+10)
+      })
+    }
     setPage(page +1)
   }
   function handlepageprev () {
@@ -50,6 +56,7 @@ export const Countries = () => {
   
 
    const filter = () => {
+    setPage(0)
     if(input.filter === 'ASC') {
       setInput({
         ...input,
@@ -82,7 +89,12 @@ export const Countries = () => {
       paises : allcountries.filter(p => p.continent === input.continent)
     })
    }
+
+  // tendria que hacer un slice (0,9)  o ()
+  //
+
    const pobFilterdown = () => {
+    setPage(0)
     setInput({
       ...input,
       search: '',
@@ -91,6 +103,7 @@ export const Countries = () => {
     })
    }
    const pobFilterup = () => {
+    setPage(0)
     setInput({
       ...input,
       search: '',
@@ -121,6 +134,8 @@ export const Countries = () => {
 }
 
 const handleActivity =  () => {
+  if(input.activities === '') return false;
+  console.log(activities)
   let i = input.activities - 1;
   let activity = activities ? activities : false;
   let countries = activity[i].Countries
@@ -132,22 +147,25 @@ const handleActivity =  () => {
 }
 
 const handlecont = () => {
+  setPage(0)
   setInput({
     ...input,
-    continent: true
+    continent: true,
+    activities: ''
   })
 }
 
+const handleAct = () => {
+  setInput({
+    ...input,
+    paises: allcountries.slice(numpag,numpag+10),
+    continent:true
+  })
+}
  
    return (
              
             <div className='contenedor' >
-              
-              <div className='buttons'>
-              <button className='btnpage' onClick={handlepageprev}>《 Anterior</button>
-              <p>{page + 1}</p>
-              <button className='btnpage'  onClick={handlepagenext}>Siguiente 》</button>
-                  </div>
                 <div className='buttons'>
                 <input name='search' value={input.search}  onChange={handleFilterChange} onClick={handlecont}
               placeholder='Buscar Pais...' />
@@ -159,7 +177,7 @@ const handlecont = () => {
                 <select 
                 name='continent' 
                 value={input.continent} 
-                onClick={contFilter}
+                onClick={handlecont}
                 onChange={handleInputChange} 
                 defaultValue='DEFAULT'
                 
@@ -174,8 +192,8 @@ const handlecont = () => {
           <option value='Oceania'>Oceania</option>
 				</select> 
         <button onClick={contFilter}>Go!</button>
-        <select name='activities'  onChange={handleInputChange} defaultValue='DEFAULT' >
-					<option >                                   
+        <select name='activities' value={input.activities} onChange={handleInputChange} onClick={handleAct} defaultValue='DEFAULT' >
+					<option  name='DEFAULT' value='' >                                   
 						Buscar por Actividad...                       
 					</option>
           {
@@ -205,6 +223,11 @@ const handlecont = () => {
                    />) 
               }
                 </div>
+                <div className='buttons'>
+              <button className='btnpage' onClick={handlepageprev}>《 Anterior</button>
+              <p>{page + 1}</p>
+              <button className='btnpage'  onClick={handlepagenext}>Siguiente 》</button>
+                  </div>
             </div>
           );   
 }

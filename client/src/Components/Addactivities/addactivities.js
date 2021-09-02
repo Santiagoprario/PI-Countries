@@ -18,7 +18,6 @@ export function  AddActivity(props) {
 
   useEffect(() => {
     dispatch(getAllCountries());
-    console.log('entro')
     return;
   },[dispatch])
 
@@ -37,11 +36,16 @@ export function  AddActivity(props) {
   }
 
   const submit = function () {
+    
     let { name , difficulty , duration , season , countries } = input;
+    if(!name || !difficulty || !duration || !season || !countries) {
+      return alert('Por favor complete todos los campos')
+    }
     axios.post('http://localhost:3001/activity',
     { name, difficulty, duration , season , countries })
     .then(r => 
       console.log(r))
+     return alert('Actividad creada con exito!')
   }
   
   const  addCountry = (e) => {
@@ -64,6 +68,8 @@ export function  AddActivity(props) {
         <label>Dificultad</label>
         <input className='input' type="range" name="difficulty"  min="1" max="5" step="1" value={input.difficulty}
          onChange={(e) => handleInputChange(e)}/>
+         <p>{input.difficulty}</p>
+         <p>Duracion de la Actividad (hs.)</p>
         <input className='input' placeholder='Duracion de la Actividad' type='number' name='duration' min='1' max='24' value={input.duration} onChange={(e) => handleInputChange(e)}/> 
         <select className='input' name='season' value={input.season} defaultValue='DISABLED' onChange={(e) => handleInputChange(e)}>
         <option  value='DISABLED'>Seleccione una estacion</option>

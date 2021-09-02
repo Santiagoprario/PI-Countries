@@ -1,10 +1,9 @@
 import React , { useEffect, useState } from 'react';
 import { useDispatch , useSelector } from 'react-redux';
-import { getAllActivities, getDetail } from '../../Actions/actions';
+import {  getDetail } from '../../Actions/actions';
 import './detailcountry.css'
 import { Link , useParams} from 'react-router-dom';
 import formatNumber from '../../Functions/functions';
-import { Countries } from '../Countries/countries';
 
 export function Detailcountry (id) {
   const dispatch = useDispatch();
@@ -16,22 +15,17 @@ export function Detailcountry (id) {
     text: 'Ver Actividades'
   })
   
-
-  console.log(idCountry) // me guardo el id del pais para hacer el pedido de las actividades
-  
   useEffect(() => {
     dispatch(getDetail(id))
-  },[id, activities, dispatch ,state.nombres ])
+  },[id, activities, dispatch ,state.nombres, state.text ])
 
   console.log(activities)
 
   let nombres = [];
-  let change =false;
 
   const handleActivity =  () => {
     let id = idCountry;
     if(state.text === 'Ocultar Actividades') {
-      console.log('entro en text')
       setState({
         ...state,
         nombres : [],
@@ -42,7 +36,7 @@ export function Detailcountry (id) {
     activity.forEach(element => {
       element.Countries.forEach(ele => {
        if(ele.idCountry === id ) {
-         nombres.push(element.name)
+         nombres.push(element)
        }
       })
     });
@@ -80,7 +74,7 @@ export function Detailcountry (id) {
                   <h4>Area: {formatNumber(details.area)} Km<sup>2</sup></h4>
                   <h4>Poblacion: {details.population !==0 ? formatNumber(details.population) : 'No se ha encontrado la Poblacion de este Pais.'  }</h4>
                    <h4>Presione el boton para ver las Actividades</h4>
-                   <h4>{state.nombres.length > 0 && state.nombres.map(nom => <li className='listOne'  key={nom}>•{nom}</li>)}</h4>
+                   <div className='act'>{state.nombres.length > 0 && state.nombres.map(nom => <li className='listOne'  key={nom}>•Nombre:{nom.name} -Dificultad: {nom.difficulty} -Duracion(hs.): {nom.duration} - Temporada: {nom.season}</li>)}</div>
                 <button className='btn' onClick={handleActivity}>{state.text}</button>
                 </div>
                 

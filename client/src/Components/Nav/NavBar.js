@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './NavBar.css'
 import logo from '../../img/logo.png';
 import { useDispatch } from 'react-redux';
-import { getCountries , getAllActivities , getAllCountries}from '../../Actions/actions';
+import {  getAllActivities , getAllCountries}from '../../Actions/actions';
 
 
 export function NavBar() {
@@ -15,11 +15,6 @@ export function NavBar() {
     dispatch(getAllCountries());
     dispatch(getAllActivities())
   }, [dispatch])
-
-
-
-
-
 
   return (
         <nav >
